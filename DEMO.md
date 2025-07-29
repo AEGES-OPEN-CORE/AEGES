@@ -19,7 +19,7 @@
 
 ---
 
-👉 **[Launch the Interactive Demo](https://qsafp-core.github.io/AEGES-OPEN-CORE/AEGES)**
+👉 **[Launch the Interactive Demo](https://qsafp-core.github.io/AEGES-OPEN-CORE)**
 
 ---
 
