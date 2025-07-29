@@ -135,9 +135,9 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 ## 🏢 Enterprise Support
 
 For enterprise deployments and commercial licensing:
-- **Website**: [aeges.org](https://aeges.org) (coming soon)
-- **Email**: enterprise@aeges.org
-- **Support**: support@aeges.org
+- **Website**: [getaeges.org](https://getaeges.org)
+- **Email**: enterprise@getaeges.org
+- **Support**: support@getaeges.org
 
 ## 🎵 Conclusion
 
