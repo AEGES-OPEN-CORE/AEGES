@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEGES - Economic Security Protocol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ff88, #00ccff, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1) drop-shadow(0 0 20px rgba(0, 255, 136, 0.3)); }
+            to { filter: brightness(1.2) drop-shadow(0 0 30px rgba(0, 255, 136, 0.6)); }
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .quantum-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .demo-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #00ff88;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scenario-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .scenario-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .scenario-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ff6b6b;
+        }
+
+        .traditional-response {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b6b;
+            margin: 15px 0;
+        }
+
+        .aeges-response {
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #00ff88;
+            margin: 15px 0;
+        }
+
+        .demo-controls {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .demo-btn {
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .demo-btn:disabled {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status-panel {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .alert {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: 500;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .alert-danger {
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .alert-warning {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid #ffc107;
+            color: #ffc107;
+        }
+
+        .alert-success {
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+        }
+
+        .alert-info {
+            background: rgba(0, 204, 255, 0.2);
+            border: 1px solid #00ccff;
+            color: #00ccff;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .value-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .value-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .value-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .stolen { color: #ff6b6b; }
+        .protected { color: #00ff88; }
+        .quarantined { color: #ffc107; }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .fincen-wallet {
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.1), rgba(255, 193, 7, 0.1));
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .fincen-title {
+            color: #ffc107;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qsafp-integration {
+            background: linear-gradient(45deg, rgba(138, 43, 226, 0.1), rgba(0, 255, 136, 0.1));
+            border: 2px solid #8a2be2;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .integration-title {
+            color: #8a2be2;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .pulse {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">AEGES</div>
+            <div class="tagline">AI-Enhanced Guardian for Economic Stability</div>
+            <div class="quantum-badge">🛡️ Quantum-Resistant Asset Protection</div>
+        </div>
+
+        <div class="demo-section">
+            <div class="section-title">
+                🎭 The Problem: DeFi Rug Pull Aftermath
+            </div>
+            <div class="scenario-container">
+                <div class="scenario-panel">
+                    <div class="scenario-title">🔥 The Heist</div>
+                    <p><strong>FlashSwap Protocol</strong> just got drained:</p>
+                    <ul style="margin: 15px 0; padding-left: 20px;">
+                        <li>$2.1M stolen in 47 seconds</li>
+                        <li>12,000 investors affected</li>
+                        <li>Scammer's wallet: 0x1337...hack</li>
+                        <li>Funds moved to mixer preparation</li>
+                    </ul>
+                    <div class="traditional-response">
+                        <strong>❌ Traditional Response:</strong><br>
+                        "Funds are gone. Sorry for your loss. Be more careful next time."
+                    </div>
+                </div>
+                <div class="scenario-panel">
+                    <div class="scenario-title">🛡️ AEGES Revolution</div>
+                    <p><strong>Making theft economically worthless:</strong></p>
+                    <ul style="margin: 15px 0; padding-left: 20px;">
+                        <li>Real-time behavioral analysis</li>
+                        <li>Post-theft value nullification</li>
+                        <li>Network-wide quarantine</li>
+                        <li>Legitimate recovery pathways</li>
+                    </ul>
+                    <div class="aeges-response">
+                        <strong>✅ AEGES Response:</strong><br>
+                        "Theft detected. Economic quarantine activated. Stolen value neutralized."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-controls">
+            <button class="demo-btn" onclick="startDemo()" id="startBtn">🚀 Launch AEGES Response</button>
+            <button class="demo-btn" onclick="resetDemo()" id="resetBtn" disabled>🔄 Reset Demo</button>
+        </div>
+
+        <div class="demo-section" id="responseSection" style="display: none;">
+            <div class="section-title">
+                ⚡ AEGES Real-Time Response
+            </div>
+            
+            <div class="value-display">
+                <div class="value-card">
+                    <div class="value-number stolen" id="stolenAmount">$2,100,000</div>
+                    <div class="value-label">Stolen Amount</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-number quarantined" id="quarantinedAmount">$0</div>
+                    <div class="value-label">Quarantined Value</div>
+                </div>
+                <div class="value-card">
+                    <div class="value-number protected" id="recoveredAmount">$0</div>
+                    <div class="value-label">Recovery Pipeline</div>
+                </div>
+            </div>
+
+            <div class="status-panel" id="statusLog">
+                <div style="color: #00ff88; font-weight: bold; margin-bottom: 10px;">🛡️ AEGES BEHAVIORAL ANALYSIS ENGINE - ACTIVE</div>
+                <div style="opacity: 0.7;">Monitoring economic patterns across 15,000+ protocols...</div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <div class="demo-section fincen-wallet hidden" id="fincenSection">
+            <div class="fincen-title">
+                🏛️ FINCEN Quarantine Wallet - Regulatory Compliance Mode
+            </div>
+            <p><strong>Advanced Feature:</strong> Automated regulatory compliance and asset isolation</p>
+            <div style="margin: 15px 0;">
+                <p>🔒 <strong>Quarantine Status:</strong> <span style="color: #ffc107;">ACTIVE</span></p>
+                <p>📊 <strong>Compliance Report:</strong> Auto-generated for authorities</p>
+                <p>⚖️ <strong>Legal Framework:</strong> Multi-jurisdictional coordination</p>
+                <p>🔄 <strong>Recovery Process:</strong> Verified claims processing</p>
+            </div>
+        </div>
+
+        <div class="demo-section qsafp-integration hidden" id="qsafpSection">
+            <div class="integration-title">
+                🔮 QSAFP Cross-Protocol Integration
+            </div>
+            <p><strong>Quantum-Secured Fail-Safe Coordination:</strong></p>
+            <div style="margin: 15px 0;">
+                <p>🛡️ <strong>Protocol Handshake:</strong> AEGES ↔ QSAFP verified</p>
+                <p>🔐 <strong>Quantum Authentication:</strong> Tamper-proof enforcement</p>
+                <p>⚡ <strong>Runtime Coordination:</strong> Economic + operational security</p>
+                <p>🌐 <strong>Global Coverage:</strong> Cross-chain protection active</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let demoStep = 0;
+        let demoActive = false;
+
+        function startDemo() {
+            if (demoActive) return;
+            
+            demoActive = true;
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('resetBtn').disabled = false;
+            document.getElementById('responseSection').style.display = 'block';
+            
+            demoStep = 0;
+            runDemoSequence();
+        }
+
+        function resetDemo() {
+            demoActive = false;
+            demoStep = 0;
+            
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('resetBtn').disabled = true;
+            document.getElementById('responseSection').style.display = 'none';
+            document.getElementById('fincenSection').classList.add('hidden');
+            document.getElementById('qsafpSection').classList.add('hidden');
+            
+            // Reset values
+            document.getElementById('stolenAmount').textContent = '$2,100,000';
+            document.getElementById('quarantinedAmount').textContent = '$0';
+            document.getElementById('recoveredAmount').textContent = '$0';
+            document.getElementById('progressBar').style.width = '0%';
+            
+            const statusLog = document.getElementById('statusLog');
+            statusLog.innerHTML = `
+                <div style="color: #00ff88; font-weight: bold; margin-bottom: 10px;">🛡️ AEGES BEHAVIORAL ANALYSIS ENGINE - ACTIVE</div>
+                <div style="opacity: 0.7;">Monitoring economic patterns across 15,000+ protocols...</div>
+            `;
+        }
+
+        function addStatusLog(message, type = 'info') {
+            const statusLog = document.getElementById('statusLog');
+            const alertClass = `alert-${type}`;
+            const logEntry = document.createElement('div');
+            logEntry.className = `alert ${alertClass}`;
+            logEntry.textContent = message;
+            statusLog.appendChild(logEntry);
+            statusLog.scrollTop = statusLog.scrollHeight;
+        }
+
+        function updateProgress(percentage) {
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+
+        function updateValues(quarantined, recovered) {
+            document.getElementById('quarantinedAmount').textContent = '$' + quarantined.toLocaleString();
+            document.getElementById('recoveredAmount').textContent = '$' + recovered.toLocaleString();
+        }
+
+        async function runDemoSequence() {
+            const steps = [
+                async () => {
+                    addStatusLog('🚨 ANOMALY DETECTED: Large-scale fund movement pattern identified', 'danger');
+                    updateProgress(10);
+                    await sleep(1500);
+                },
+                async () => {
+                    addStatusLog('🔍 BEHAVIORAL ANALYSIS: Wallet 0x1337...hack flagged for suspicious activity', 'warning');
+                    updateProgress(25);
+                    await sleep(2000);
+                },
+                async () => {
+                    addStatusLog('⚡ PATTERN RECOGNITION: FlashSwap protocol drain signature matched', 'warning');
+                    updateProgress(40);
+                    await sleep(1500);
+                },
+                async () => {
+                    addStatusLog('🛡️ QUARANTINE ACTIVATED: Economic isolation protocol engaged', 'info');
+                    updateValues(2100000, 0);
+                    updateProgress(60);
+                    await sleep(2000);
+                },
+                async () => {
+                    addStatusLog('🌐 NETWORK PROPAGATION: All major exchanges and DEXs notified', 'success');
+                    updateProgress(75);
+                    await sleep(1500);
+                },
+                async () => {
+                    addStatusLog('🏛️ FINCEN WALLET: Regulatory quarantine mode activated', 'info');
+                    document.getElementById('fincenSection').classList.remove('hidden');
+                    updateProgress(85);
+                    await sleep(2000);
+                },
+                async () => {
+                    addStatusLog('🔮 QSAFP INTEGRATION: Cross-protocol security coordination established', 'success');
+                    document.getElementById('qsafpSection').classList.remove('hidden');
+                    updateProgress(95);
+                    await sleep(1500);
+                },
+                async () => {
+                    addStatusLog('✅ MISSION ACCOMPLISHED: $2.1M theft rendered economically worthless', 'success');
+                    addStatusLog('🔄 RECOVERY PIPELINE: Legitimate holders can now file verified claims', 'success');
+                    updateValues(2100000, 1850000);
+                    updateProgress(100);
+                    await sleep(1000);
+                },
+                async () => {
+                    addStatusLog('🎯 RESULT: Scammer has worthless digits. Investors have recovery path.', 'success');
+                    await sleep(500);
+                }
+            ];
+
+            for (let i = 0; i < steps.length; i++) {
+                if (!demoActive) break;
+                await steps[i]();
+            }
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Auto-start demo after 3 seconds
+        setTimeout(() => {
+            if (!demoActive) {
+                startDemo();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
