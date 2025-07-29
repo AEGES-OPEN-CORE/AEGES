@@ -19,7 +19,7 @@
 
 ---
 
-## 🚀 Launch AEGES Response | 🔄 Reset Demo
+👉 **[Launch the Interactive Demo](https://qsafp-core.github.io/AEGES-OPEN-CORE/)**
 
 ---
 
