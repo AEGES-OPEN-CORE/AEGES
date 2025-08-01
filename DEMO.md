@@ -19,7 +19,7 @@
 
 ---
 
-👉 **[Launch the Interactive Demo](https://QSAFP.ORG)**
+👉 **[Launch the Interactive Demo](https://getAEGES.ORG)**
 
 ---
 
