@@ -105,6 +105,8 @@ Experience AEGES in action: **[View Interactive Demo](./index.html)**
 - Adaptive AI defense evolution
 - Complementary multi-layer security
 
+AEGES Welcome Thread
+https://github.com/qsafp-core/aeges-open-core/discussions/1
 [![Discussions](https://img.shields.io/badge/Discussions-Join_the_Conversation-blueviolet)](https://github.com/qsafp-core/aeges-open-core/discussions)
 
 ## 🛠️ Installation
