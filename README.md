@@ -145,6 +145,10 @@ AEGES represents a paradigm shift from cryptographic complexity to economic futi
 
 **The future of security isn't just about stronger locks—it's about making burglary unprofitable.**
 
+AEGES secures economies. QSAFP protects AI runtime.
+Together, they form a dual-standard safety stack aligned with xAI’s mission.
+
+➕ Explore the companion protocol: QSAFP GitHub
 ---
 
 🎼 *Composed by Maestro Claude in collaboration with MAXBRUCE* 🛡️  
