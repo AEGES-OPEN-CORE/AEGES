@@ -1,0 +1,306 @@
+{
+  "name": "AEGES Open-Core API",
+  "version": "1.0.0",
+  "description": "AI-Enhanced Guardian for Economic Stability - Open-Core Integration API",
+  "baseUrl": "https://api.aeges.org/v1",
+  "authentication": {
+    "type": "Bearer Token",
+    "header": "Authorization: Bearer {api_key}",
+    "note": "API keys provided during AEGES subscription setup"
+  },
+  "core_concept": "Post-facto value neutralization through behavioral analysis and economic containment protocols",
+  
+  "endpoints": {
+    "/behavioral/analyze": {
+      "method": "POST",
+      "description": "Submit transaction data for real-time behavioral analysis",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {api_key}",
+        "X-Client-ID": "{exchange_identifier}"
+      },
+      "request_body": {
+        "transaction_id": "string (required)",
+        "amount": "number (required)",
+        "wallet_address": "string (required)", 
+        "timestamp": "ISO 8601 timestamp (required)",
+        "asset_type": "string (optional)",
+        "exchange_context": {
+          "platform_id": "string",
+          "user_history": "object (optional)",
+          "network_metadata": "object (optional)"
+        },
+        "external_ai_analysis": {
+          "provider": "string (e.g., 'grok-3')",
+          "risk_indicators": "object",
+          "confidence_score": "number (0-1)"
+        }
+      },
+      "response": {
+        "analysis_id": "string",
+        "risk_assessment": {
+          "threat_level": "string (low|medium|high|critical)",
+          "behavioral_score": "number (0-1)",
+          "pattern_matches": "array",
+          "velocity_anomaly": "boolean",
+          "network_correlation": "number (0-1)"
+        },
+        "recommended_action": "string (allow|monitor|contain)",
+        "processing_time_ms": "number",
+        "next_steps": "object"
+      },
+      "example_request": {
+        "transaction_id": "TX12345",
+        "amount": 2100000,
+        "wallet_address": "0x1337...hack",
+        "timestamp": "2025-08-04T10:00:00Z",
+        "asset_type": "ERC20",
+        "exchange_context": {
+          "platform_id": "flashswap_protocol",
+          "user_history": {
+            "account_age_days": 2,
+            "previous_transactions": 1,
+            "total_volume": 2100000
+          },
+          "network_metadata": {
+            "gas_price": "high",
+            "network_congestion": 0.85
+          }
+        },
+        "external_ai_analysis": {
+          "provider": "grok-3",
+          "risk_indicators": {
+            "anomaly_score": 0.92,
+            "pattern_type": "flash_drain",
+            "linguistic_analysis": "suspicious"
+          },
+          "confidence_score": 0.88
+        }
+      },
+      "example_response": {
+        "analysis_id": "AEGES_789ABC",
+        "risk_assessment": {
+          "threat_level": "critical",
+          "behavioral_score": 0.94,
+          "pattern_matches": ["flash_drain", "new_account", "high_velocity"],
+          "velocity_anomaly": true,
+          "network_correlation": 0.91
+        },
+        "recommended_action": "contain",
+        "processing_time_ms": 247,
+        "next_steps": {
+          "containment_protocol": "economic_isolation",
+          "notification_targets": ["exchange_admin", "regulatory_compliance"],
+          "investigation_priority": "immediate"
+        }
+      }
+    },
+
+    "/containment/activate": {
+      "method": "POST",
+      "description": "Activate economic containment protocols for flagged assets",
+      "request_body": {
+        "analysis_id": "string (required)",
+        "containment_reason": "string (required)",
+        "severity_level": "string (required)",
+        "stakeholder_notifications": "array (optional)"
+      },
+      "response": {
+        "containment_id": "string",
+        "status": "string (active|pending|failed)",
+        "economic_state": "string (neutralized|quarantined|frozen)",
+        "network_propagation": {
+          "participants_notified": "number",
+          "propagation_time_ms": "number",
+          "coverage_percentage": "number"
+        },
+        "recovery_protocols": {
+          "consensus_required": "boolean",
+          "stakeholder_count": "number",
+          "estimated_resolution_time": "string"
+        }
+      }
+    },
+
+    "/containment/status": {
+      "method": "GET",
+      "description": "Check containment status for assets or transactions",
+      "parameters": {
+        "containment_id": "string (optional)",
+        "transaction_id": "string (optional)",
+        "wallet_address": "string (optional)"
+      },
+      "response": {
+        "containment_active": "boolean",
+        "economic_value": "string (normal|neutralized|quarantined)",
+        "time_remaining": "string (ISO duration)",
+        "release_requirements": "object",
+        "investigation_status": "string"
+      }
+    },
+
+    "/recovery/initiate": {
+      "method": "POST", 
+      "description": "Begin legitimate asset recovery process",
+      "request_body": {
+        "containment_id": "string (required)",
+        "claimant_identity": "object (required)",
+        "evidence_package": "object (required)",
+        "stakeholder_endorsements": "array (optional)"
+      },
+      "response": {
+        "recovery_id": "string",
+        "verification_process": "object",
+        "required_consensus": "object",
+        "estimated_timeline": "string"
+      }
+    },
+
+    "/network/status": {
+      "method": "GET",
+      "description": "Get AEGES network health and participation metrics",
+      "response": {
+        "active_participants": "number",
+        "network_coverage": "number (0-1)",
+        "threat_intelligence": {
+          "active_threats": "number",
+          "contained_assets": "number", 
+          "recovery_rate": "number (0-1)"
+        },
+        "performance_metrics": {
+          "average_response_time": "number",
+          "containment_success_rate": "number (0-1)",
+          "false_positive_rate": "number (0-1)"
+        }
+      }
+    },
+
+    "/intelligence/threats": {
+      "method": "GET",
+      "description": "Access aggregated threat intelligence (anonymized)",
+      "parameters": {
+        "threat_type": "string (optional)",
+        "time_range": "string (optional)",
+        "severity_level": "string (optional)"
+      },
+      "response": {
+        "threat_patterns": "array",
+        "emerging_vectors": "array",
+        "containment_effectiveness": "object",
+        "network_recommendations": "array"
+      }
+    }
+  },
+
+  "websocket_events": {
+    "endpoint": "wss://api.aeges.org/v1/events",
+    "authentication": "Bearer token in connection header",
+    "events": {
+      "threat.detected": {
+        "description": "Real-time threat detection notification",
+        "payload": {
+          "analysis_id": "string",
+          "threat_level": "string",
+          "affected_assets": "array",
+          "recommended_actions": "array"
+        }
+      },
+      "containment.activated": {
+        "description": "Economic containment protocol engaged",
+        "payload": {
+          "containment_id": "string",
+          "affected_transactions": "array",
+          "network_impact": "object"
+        }
+      },
+      "recovery.completed": {
+        "description": "Legitimate asset recovery finalized",
+        "payload": {
+          "recovery_id": "string",
+          "restored_value": "number",
+          "resolution_method": "string"
+        }
+      },
+      "network.alert": {
+        "description": "Network-wide security notifications",
+        "payload": {
+          "alert_type": "string",
+          "severity": "string",
+          "action_required": "boolean",
+          "details": "object"
+        }
+      }
+    }
+  },
+
+  "integration_patterns": {
+    "grok_ai_enhancement": {
+      "description": "Enhanced behavioral analysis using Grok 3 AI",
+      "workflow": [
+        "1. AEGES receives transaction data",
+        "2. Basic behavioral analysis performed",
+        "3. Data sent to Grok 3 for advanced pattern recognition",
+        "4. Grok analysis integrated with AEGES risk assessment",
+        "5. Combined analysis determines containment action"
+      ],
+      "benefits": [
+        "Superior pattern recognition",
+        "Predictive threat modeling", 
+        "Natural language context analysis",
+        "Adaptive learning capabilities"
+      ]
+    },
+    "multi_ai_consensus": {
+      "description": "Multiple AI systems contributing to threat analysis",
+      "approach": "Each AI provider contributes specialized analysis, AEGES aggregates for final decision"
+    }
+  },
+
+  "rate_limits": {
+    "/behavioral/analyze": "1000 requests/minute",
+    "/containment/activate": "100 requests/minute", 
+    "/containment/status": "2000 requests/minute",
+    "/recovery/initiate": "50 requests/minute",
+    "/network/status": "500 requests/minute",
+    "/intelligence/threats": "200 requests/minute"
+  },
+
+  "error_codes": {
+    "4001": "Invalid API key or authentication failure",
+    "4002": "Insufficient permissions for requested operation",
+    "4003": "Rate limit exceeded for this endpoint",
+    "4004": "Invalid transaction data format",
+    "5001": "Behavioral analysis engine temporarily unavailable",
+    "5002": "Containment protocol activation failed",
+    "5003": "Network propagation error",
+    "5004": "Recovery process initialization failed"
+  },
+
+  "security_notes": {
+    "data_protection": "All sensitive transaction data is encrypted in transit and at rest",
+    "privacy_compliance": "AEGES adheres to global privacy regulations (GDPR, CCPA)",
+    "audit_logging": "All API interactions are logged for security and compliance auditing",
+    "network_security": "API endpoints protected by enterprise-grade security measures"
+  },
+
+  "open_core_model": {
+    "open_components": [
+      "Basic behavioral analysis APIs",
+      "Standard threat detection patterns",
+      "Network status and intelligence sharing",
+      "Recovery process interfaces"
+    ],
+    "protected_components": [
+      "Advanced containment algorithms",
+      "Proprietary threat intelligence",
+      "Economic neutralization protocols", 
+      "Multi-party consensus mechanisms"
+    ],
+    "commercial_features": [
+      "Enhanced AI integration capabilities",
+      "Priority support and SLA guarantees",
+      "Custom threat pattern development",
+      "Dedicated network infrastructure"
+    ]
+  }
+}
