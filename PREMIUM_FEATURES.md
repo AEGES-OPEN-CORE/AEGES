@@ -52,7 +52,7 @@ We protect the commons by enabling responsible builders.
 ---
 
 ## 📬 Contact
-📧 licensing@getaeges.org  
+📧 licensing@bwrci.org  
 🌐 [getaeges.org](https://getaeges.org)
 
 **AEGES: The guardian protocol of economic security.**
