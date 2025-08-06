@@ -17,6 +17,21 @@ We welcome contributions across:
 - Post-quantum cryptographic enhancements
 - UI/UX for the AEGES demo layer
 - Documentation and diagrams
+## 🔒 Branch Protection Policy
+
+To preserve the trustworthiness and sovereign integrity of AEGES (AI-Enhanced Guardian for Economic Stability), the `main` branch is protected by the following enforced controls:
+
+- ✅ All contributions must be submitted via **Pull Requests (PRs)**
+- ✅ Each PR requires **at least one approval** prior to merge
+- 🚫 **Direct commits** to `main` are disallowed — including by maintainers
+- 🔐 **Force pushes and branch deletions** are strictly prohibited
+- 👁️ Bypass privileges are limited to `Repository Admins` and designated `Maintainers` under internal governance protocols
+
+These protections are not just best practices — they are essential for the integrity of AEGES as a sovereign-grade security framework. Every line of code reflects a shared responsibility: to uphold public trust, economic transparency, and institutional resilience against digital threats.
+
+> 🧩 AEGES is designed to operate as critical national infrastructure. Therefore, its development pipeline must be defensible, verifiable, and tamper-resistant by design.
+
+For access requests or protocol-level collaboration, email 📫 [dev@bwrci.org](mailto:dev@bwrci.org).
 
 ## Code of Conduct
 
