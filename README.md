@@ -13,6 +13,7 @@ This folder contains the **enhanced Grok3 integration** for AEGES, featuring:
 ## 📜 API Specification
 
 See [**aeges_api_specification.json**](integration-kits/grok3/aeges_api_specification.json)
+
  for the complete, code-mirrored API documentation.
 
 ---
@@ -20,6 +21,7 @@ See [**aeges_api_specification.json**](integration-kits/grok3/aeges_api_specific
 ## 🚀 Deployment Guide
 
 See the **root** [**README.md**](../../README.md)
+
  for:
 
 - Full project overview
