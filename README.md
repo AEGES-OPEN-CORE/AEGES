@@ -1,42 +1,51 @@
-# 🛡 AEGES Grok3 Integration Kit
+# 🛡️ AEGES – AI-Enhanced Guardian for Economic Stability
 
-This folder contains the **enhanced Grok3 integration** for AEGES, featuring:
+**Quantum-resistant security for critical infrastructure & economic stability** —  
+aligned with **NIST Cybersecurity Framework 2.0** and compatible with **NIST PQC standards**.
 
-- Multi-provider AI consensus (xAI → OpenAI → Anthropic → Mock)
-- Sub-800ms target response time
-- Demo, Development, and Production modes
-- Security hardening with input validation and rate limiting
-- Full deployment support (Docker & Kubernetes)
+AEGES is an open-core framework designed to protect high-value systems and economies against  
+advanced cyber threats, including those posed by quantum computing.
 
 ---
 
-## 📜 API Specification
-
-See [**aeges_api_specification.json**](integration-kits/grok3/aeges_api_specification.json)
-
- for the complete, code-mirrored API documentation.
-
----
-
-## 🚀 Deployment Guide
-
-See the **root** [**README.md**](../../README.md)
-
- for:
-
-- Full project overview
-- Environment setup
-- Deployment instructions
-- Performance metrics
+## 🚀 Key Features
+- **Post-Quantum Cryptography (PQC)** – NIST-aligned algorithms for future-proof security.
+- **Critical Infrastructure Hardening** – Secure runtime enforcement and behavioral controls.
+- **Modular Integration Kits** – Plug-and-play AI & infrastructure protection modules.
+- **Open-Core Model** – Free core features for the community, with premium enterprise extensions.
+- **Compliance-Ready** – Built to align with NIST CSF 2.0, ISO 27001, and sector-specific regulations.
 
 ---
 
-## 📂 Files in This Folder
+## 📂 Repository Structure
 
-- **`aeges_enhanced_integration.js`** — Main integration code  
-- **`aeges_api_specification.json`** — Complete documented API spec  
-- **`deployment_guide.md`** — Detailed deployment steps for this integration  
+| Path                              | Description |
+|-----------------------------------|-------------|
+| `README.md`                       | **You are here** – project overview |
+| `ARCHITECTURE.md`                 | System architecture & design principles |
+| `CODE_OF_CONDUCT.md`              | Community guidelines |
+| `CONTRIBUTING.md`                 | Contribution process |
+| `SECURITY.md`                     | Vulnerability disclosure policy |
+| `PREMIUM_FEATURES.md`              | Enterprise-only extensions overview |
+| `integration-kits/`               | Folder for modular integrations |
+| `integration-kits/grok3/README.md`| Enhanced Grok3 AI integration kit |
+| `demo/` *(if applicable)*         | Demonstration and testing assets |
 
 ---
 
-> **Tip:** Run in Demo Mode with no API keys required to test instantly, then upgrade to Development or Production Mode by adding provider keys to your `.env` file.
+## 🔌 Integration Kits
+
+AEGES ships with specialized kits for integrating AI systems, APIs, and infrastructure protections.
+
+- [**Grok3 Integration Kit**](integration-kits/grok3/README.md) –  
+  Multi-provider AI consensus (xAI → OpenAI → Anthropic → Mock), sub-800ms response,  
+  security hardening, and full Docker/Kubernetes deployment support.
+
+---
+
+## 🏁 Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/AEGES-OPEN-CORE/AEGES.git
+   cd AEGES
