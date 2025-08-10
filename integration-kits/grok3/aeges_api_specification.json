@@ -1,306 +1,292 @@
 {
-  "name": "AEGES Open-Core API",
+  "name": "AEGES Integration Kit (Grok3)",
   "version": "1.0.0",
-  "description": "AI-Enhanced Guardian for Economic Stability - Open-Core Integration API",
-  "baseUrl": "https://api.aeges.org/v1",
-  "authentication": {
-    "type": "Bearer Token",
-    "header": "Authorization: Bearer {api_key}",
-    "note": "API keys provided during AEGES subscription setup"
+  "generated_at": "2025-08-10T00:00:00Z",
+  "description": "Enhanced multi-provider AI integration for AEGES with demo/dev/prod capability, input validation, rate limiting, consensus mode, metrics, and health checks.",
+  "module": {
+    "entry": "integration-kits/grok3/aeges_enhanced_integration.js",
+    "exports": [
+      "GrokAEGESIntegration",
+      "MultiAIAnalyzer",
+      "AIProviderManager",
+      "AI_CONFIG"
+    ]
   },
-  "core_concept": "Post-facto value neutralization through behavioral analysis and economic containment protocols",
-  
-  "endpoints": {
-    "/behavioral/analyze": {
-      "method": "POST",
-      "description": "Submit transaction data for real-time behavioral analysis",
-      "headers": {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer {api_key}",
-        "X-Client-ID": "{exchange_identifier}"
-      },
-      "request_body": {
-        "transaction_id": "string (required)",
-        "amount": "number (required)",
-        "wallet_address": "string (required)", 
-        "timestamp": "ISO 8601 timestamp (required)",
-        "asset_type": "string (optional)",
-        "exchange_context": {
-          "platform_id": "string",
-          "user_history": "object (optional)",
-          "network_metadata": "object (optional)"
+  "environment": {
+    "XAI_API_KEY": "string (required for xAI provider in dev/prod; unused in demo)",
+    "OPENAI_API_KEY": "string (optional fallback)",
+    "ANTHROPIC_API_KEY": "string (optional fallback)",
+    "NODE_ENV": "development | production (optional)",
+    "PROVIDER_PREFERENCE": "comma-separated list of providers (optional)",
+    "RATE_LIMIT_RPS": "number (optional; if set, overrides defaults where applicable)"
+  },
+  "config": {
+    "AI_CONFIG": {
+      "providers": {
+        "xai": {
+          "enabled": "boolean (true if XAI_API_KEY present)",
+          "endpoint": "https://api.x.ai/v1/chat/completions",
+          "model": "grok-beta",
+          "maxTokens": 2048,
+          "rateLimit": { "requests": 1000, "window": 60000 },
+          "description": "xAI Grok 3 - Advanced reasoning and analysis"
         },
-        "external_ai_analysis": {
-          "provider": "string (e.g., 'grok-3')",
-          "risk_indicators": "object",
-          "confidence_score": "number (0-1)"
+        "openai": {
+          "enabled": "boolean (true if OPENAI_API_KEY present)",
+          "endpoint": "https://api.openai.com/v1/chat/completions",
+          "model": "gpt-4",
+          "maxTokens": 2048,
+          "rateLimit": { "requests": 500, "window": 60000 },
+          "description": "OpenAI GPT-4 - Reliable analysis capabilities"
+        },
+        "anthropic": {
+          "enabled": "boolean (true if ANTHROPIC_API_KEY present)",
+          "endpoint": "https://api.anthropic.com/v1/messages",
+          "model": "claude-3-sonnet-20240229",
+          "maxTokens": 2048,
+          "rateLimit": { "requests": 300, "window": 60000 },
+          "description": "Anthropic Claude - Constitutional AI alignment"
+        },
+        "mock": {
+          "enabled": true,
+          "latency": { "min": 200, "max": 800 },
+          "description": "Demo Mode - Full-featured simulation"
         }
       },
-      "response": {
-        "analysis_id": "string",
-        "risk_assessment": {
-          "threat_level": "string (low|medium|high|critical)",
-          "behavioral_score": "number (0-1)",
-          "pattern_matches": "array",
-          "velocity_anomaly": "boolean",
-          "network_correlation": "number (0-1)"
+      "fallbackOrder": ["xai", "openai", "anthropic", "mock"],
+      "consensusThreshold": 0.7
+    }
+  },
+  "classes": {
+    "AIProviderManager": {
+      "constructor": { "args": [] },
+      "properties": [
+        "rateLimiter: RateLimiter",
+        "eventEmitter: EventEmitter",
+        "activeProviders: Array<{name: string, enabled: boolean, ...providerConfig}>"
+      ],
+      "events": {
+        "analysis_complete": {
+          "payload": { "provider": "string", "duration": "number(ms)", "success": true }
         },
-        "recommended_action": "string (allow|monitor|contain)",
-        "processing_time_ms": "number",
-        "next_steps": "object"
+        "analysis_error": {
+          "payload": { "provider": "string", "error": "string", "duration": "number(ms)" }
+        }
       },
-      "example_request": {
-        "transaction_id": "TX12345",
-        "amount": 2100000,
-        "wallet_address": "0x1337...hack",
-        "timestamp": "2025-08-04T10:00:00Z",
-        "asset_type": "ERC20",
-        "exchange_context": {
-          "platform_id": "flashswap_protocol",
-          "user_history": {
-            "account_age_days": 2,
-            "previous_transactions": 1,
-            "total_volume": 2100000
+      "methods": {
+        "getActiveProviders": {
+          "args": [],
+          "returns": "Array<{ name: string, description: string, ... }>"
+        },
+        "callProvider": {
+          "args": [
+            { "name": "provider", "type": "xai | openai | anthropic | mock" },
+            { "name": "prompt", "type": "string" },
+            { "name": "options", "type": "object", "optional": true }
+          ],
+          "returns": {
+            "provider": "string",
+            "response": "string",
+            "confidence": "number(0..0.95)",
+            "duration": "number(ms)",
+            "model": "string"
           },
-          "network_metadata": {
-            "gas_price": "high",
-            "network_congestion": 0.85
+          "errors": ["Error('Rate limit exceeded ...')", "Error('Unexpected response format')", "AbortError", "Fetch/HTTP errors"]
+        },
+        "makeAPICall": {
+          "args": [
+            { "name": "config", "type": "ProviderConfig" },
+            { "name": "prompt", "type": "string" },
+            { "name": "options", "type": "object", "optional": true }
+          ],
+          "returns": { "content": "string", "raw": "object" }
+        },
+        "mockAnalysis": {
+          "args": [
+            { "name": "prompt", "type": "string" },
+            { "name": "options", "type": "object", "optional": true }
+          ],
+          "returns": { "content": "string", "raw": { "mock": true, "prompt_type": "behavioral|threat|consensus" } }
+        },
+        "calculateConfidence": {
+          "args": [{ "name": "response", "type": "{content:string, raw:object}"}],
+          "returns": "number(0..0.95)"
+        }
+      }
+    },
+    "GrokAEGESIntegration": {
+      "constructor": {
+        "args": [
+          {
+            "name": "options",
+            "type": "{ enableConsensus?: boolean, primaryProvider?: 'xai'|'openai'|'anthropic'|'mock' }",
+            "optional": true
+          }
+        ],
+        "initializes": [
+          "aiManager: AIProviderManager",
+          "enableConsensus: boolean",
+          "primaryProvider: string",
+          "metrics: { totalAnalyses:number, averageLatency:number, successRate:number, providerUsage:Record<string,number> }"
+        ]
+      },
+      "methods": {
+        "analyzeTransactionWithAI": {
+          "description": "Validates transaction data, builds prompt, runs single-provider or consensus analysis.",
+          "args": [
+            {
+              "name": "transactionData",
+              "type": "{ id:string, amount:number>=0, timestamp:number|ISOstring, from:string, to:string, network?:string }"
+            },
+            { "name": "options", "type": "{ analysisType?: 'behavioral'|'threat'|'consensus'|'comprehensive', ... }", "optional": true }
+          ],
+          "returns": {
+            "when enableConsensus=false": {
+              "analysis": "string",
+              "provider": "string",
+              "confidence": "number",
+              "duration": "number(ms)",
+              "model": "string",
+              "consensus": false
+            },
+            "when enableConsensus=true": {
+              "analysis": "string (aggregated)",
+              "providers": "string[]",
+              "confidence": "number",
+              "duration": "number(ms, max across providers)",
+              "consensus": true,
+              "agreement": "boolean (avg confidence > consensusThreshold)"
+            }
+          },
+          "errors": ["Error('Missing required field ...')", "Error('All AI providers failed')", "Error('Analysis failed: ...')"]
+        },
+        "generateAnalysisPrompt": {
+          "args": [
+            { "name": "transactionData", "type": "object (see above)" },
+            { "name": "options", "type": "object", "optional": true }
+          ],
+          "returns": "string (structured prompt)"
+        },
+        "performSingleProviderAnalysis": {
+          "args": [{ "name": "prompt", "type": "string" }, { "name": "options", "type": "object", "optional": true }],
+          "returns": {
+            "analysis": "string",
+            "provider": "string",
+            "confidence": "number",
+            "duration": "number(ms)",
+            "model": "string",
+            "consensus": false
           }
         },
-        "external_ai_analysis": {
-          "provider": "grok-3",
-          "risk_indicators": {
-            "anomaly_score": 0.92,
-            "pattern_type": "flash_drain",
-            "linguistic_analysis": "suspicious"
-          },
-          "confidence_score": 0.88
-        }
-      },
-      "example_response": {
-        "analysis_id": "AEGES_789ABC",
-        "risk_assessment": {
-          "threat_level": "critical",
-          "behavioral_score": 0.94,
-          "pattern_matches": ["flash_drain", "new_account", "high_velocity"],
-          "velocity_anomaly": true,
-          "network_correlation": 0.91
+        "performConsensusAnalysis": {
+          "args": [{ "name": "prompt", "type": "string" }, { "name": "options", "type": "object", "optional": true }],
+          "returns": {
+            "analysis": "string",
+            "providers": "string[]",
+            "confidence": "number",
+            "duration": "number(ms)",
+            "consensus": true,
+            "agreement": "boolean"
+          }
         },
-        "recommended_action": "contain",
-        "processing_time_ms": 247,
-        "next_steps": {
-          "containment_protocol": "economic_isolation",
-          "notification_targets": ["exchange_admin", "regulatory_compliance"],
-          "investigation_priority": "immediate"
-        }
-      }
-    },
-
-    "/containment/activate": {
-      "method": "POST",
-      "description": "Activate economic containment protocols for flagged assets",
-      "request_body": {
-        "analysis_id": "string (required)",
-        "containment_reason": "string (required)",
-        "severity_level": "string (required)",
-        "stakeholder_notifications": "array (optional)"
-      },
-      "response": {
-        "containment_id": "string",
-        "status": "string (active|pending|failed)",
-        "economic_state": "string (neutralized|quarantined|frozen)",
-        "network_propagation": {
-          "participants_notified": "number",
-          "propagation_time_ms": "number",
-          "coverage_percentage": "number"
+        "calculateConsensus": {
+          "args": [{ "name": "responses", "type": "Array<{provider:string, response:string, confidence:number, duration:number}>"}],
+          "returns": {
+            "aggregatedAnalysis": "string",
+            "confidence": "number",
+            "agreement": "boolean"
+          }
         },
-        "recovery_protocols": {
-          "consensus_required": "boolean",
-          "stakeholder_count": "number",
-          "estimated_resolution_time": "string"
-        }
-      }
-    },
-
-    "/containment/status": {
-      "method": "GET",
-      "description": "Check containment status for assets or transactions",
-      "parameters": {
-        "containment_id": "string (optional)",
-        "transaction_id": "string (optional)",
-        "wallet_address": "string (optional)"
-      },
-      "response": {
-        "containment_active": "boolean",
-        "economic_value": "string (normal|neutralized|quarantined)",
-        "time_remaining": "string (ISO duration)",
-        "release_requirements": "object",
-        "investigation_status": "string"
-      }
-    },
-
-    "/recovery/initiate": {
-      "method": "POST", 
-      "description": "Begin legitimate asset recovery process",
-      "request_body": {
-        "containment_id": "string (required)",
-        "claimant_identity": "object (required)",
-        "evidence_package": "object (required)",
-        "stakeholder_endorsements": "array (optional)"
-      },
-      "response": {
-        "recovery_id": "string",
-        "verification_process": "object",
-        "required_consensus": "object",
-        "estimated_timeline": "string"
-      }
-    },
-
-    "/network/status": {
-      "method": "GET",
-      "description": "Get AEGES network health and participation metrics",
-      "response": {
-        "active_participants": "number",
-        "network_coverage": "number (0-1)",
-        "threat_intelligence": {
-          "active_threats": "number",
-          "contained_assets": "number", 
-          "recovery_rate": "number (0-1)"
+        "updateMetrics": {
+          "args": [{ "name": "data", "type": "{ provider:string, duration:number, success:boolean }"}],
+          "returns": "void"
         },
-        "performance_metrics": {
-          "average_response_time": "number",
-          "containment_success_rate": "number (0-1)",
-          "false_positive_rate": "number (0-1)"
+        "getMetrics": {
+          "args": [],
+          "returns": {
+            "totalAnalyses": "number",
+            "averageLatency": "number(ms, rounded)",
+            "successRate": "number(0..1)",
+            "providerUsage": "Record<string, number>",
+            "availableProviders": "Array<{name:string, description:string, enabled:true}>",
+            "configuration": {
+              "primaryProvider": "string",
+              "consensusEnabled": "boolean",
+              "targetLatency": "string ('< 800ms')"
+            }
+          }
+        },
+        "healthCheck": {
+          "args": [],
+          "returns": {
+            "overall": "healthy | unhealthy",
+            "providers": "Record<string, {status:'healthy'|'unhealthy', latency?:number, model?:string, error?:string}>",
+            "timestamp": "ISO-8601 string"
+          }
         }
       }
     },
-
-    "/intelligence/threats": {
-      "method": "GET",
-      "description": "Access aggregated threat intelligence (anonymized)",
-      "parameters": {
-        "threat_type": "string (optional)",
-        "time_range": "string (optional)",
-        "severity_level": "string (optional)"
-      },
-      "response": {
-        "threat_patterns": "array",
-        "emerging_vectors": "array",
-        "containment_effectiveness": "object",
-        "network_recommendations": "array"
-      }
-    }
-  },
-
-  "websocket_events": {
-    "endpoint": "wss://api.aeges.org/v1/events",
-    "authentication": "Bearer token in connection header",
-    "events": {
-      "threat.detected": {
-        "description": "Real-time threat detection notification",
-        "payload": {
-          "analysis_id": "string",
-          "threat_level": "string",
-          "affected_assets": "array",
-          "recommended_actions": "array"
-        }
-      },
-      "containment.activated": {
-        "description": "Economic containment protocol engaged",
-        "payload": {
-          "containment_id": "string",
-          "affected_transactions": "array",
-          "network_impact": "object"
-        }
-      },
-      "recovery.completed": {
-        "description": "Legitimate asset recovery finalized",
-        "payload": {
-          "recovery_id": "string",
-          "restored_value": "number",
-          "resolution_method": "string"
-        }
-      },
-      "network.alert": {
-        "description": "Network-wide security notifications",
-        "payload": {
-          "alert_type": "string",
-          "severity": "string",
-          "action_required": "boolean",
-          "details": "object"
+    "MultiAIAnalyzer": {
+      "constructor": { "args": [], "initializes": ["integration: GrokAEGESIntegration (consensus enabled)"] },
+      "methods": {
+        "analyzeWithMultipleProviders": {
+          "args": [
+            { "name": "transactionData", "type": "object (same as analyzeTransactionWithAI)" },
+            { "name": "analysisTypes", "type": "Array<'behavioral'|'threat'|'consensus'>", "optional": true, "default": ["behavioral","threat","consensus"] }
+          ],
+          "returns": {
+            "transactionId": "string",
+            "analyses": "Record<string, { analysis?:string, providers?:string[], confidence?:number, duration?:number, consensus?:boolean, agreement?:boolean, error?:string }>",
+            "timestamp": "ISO-8601 string",
+            "summary": { "totalAnalyses": "number", "successfulAnalyses": "number", "averageConfidence": "number(0..1)", "recommendedAction": "proceed | review" }
+          }
+        },
+        "generateSummary": {
+          "args": [{ "name": "results", "type": "Record<string,ResultOrError>" }],
+          "returns": { "totalAnalyses": "number", "successfulAnalyses": "number", "averageConfidence": "number", "recommendedAction": "string" }
         }
       }
     }
   },
-
-  "integration_patterns": {
-    "grok_ai_enhancement": {
-      "description": "Enhanced behavioral analysis using Grok 3 AI",
-      "workflow": [
-        "1. AEGES receives transaction data",
-        "2. Basic behavioral analysis performed",
-        "3. Data sent to Grok 3 for advanced pattern recognition",
-        "4. Grok analysis integrated with AEGES risk assessment",
-        "5. Combined analysis determines containment action"
-      ],
-      "benefits": [
-        "Superior pattern recognition",
-        "Predictive threat modeling", 
-        "Natural language context analysis",
-        "Adaptive learning capabilities"
-      ]
+  "validation": {
+    "InputValidator.validateTransactionData": {
+      "requires": ["id", "amount", "timestamp", "from", "to"],
+      "sanitizes": ["id", "from", "to (strip <>\"'&)"],
+      "constraints": { "amount": "number >= 0" },
+      "errors": ["Error('Invalid transaction data ...')", "Error('Missing required field: ...')", "Error('Amount must be a positive number')"]
     },
-    "multi_ai_consensus": {
-      "description": "Multiple AI systems contributing to threat analysis",
-      "approach": "Each AI provider contributes specialized analysis, AEGES aggregates for final decision"
+    "InputValidator.validatePrompt": {
+      "constraints": { "type": "string", "minLength": 1, "maxLength": 10000 },
+      "returns": "trimmed string",
+      "errors": ["Error('Prompt must be a non-empty string')", "Error('Prompt too long: maximum 10,000 characters')"]
     }
   },
-
-  "rate_limits": {
-    "/behavioral/analyze": "1000 requests/minute",
-    "/containment/activate": "100 requests/minute", 
-    "/containment/status": "2000 requests/minute",
-    "/recovery/initiate": "50 requests/minute",
-    "/network/status": "500 requests/minute",
-    "/intelligence/threats": "200 requests/minute"
+  "rateLimiting": {
+    "algorithm": "fixed-window per provider",
+    "windowKey": "provider + floor(now / windowMs)",
+    "enforcedOn": ["xai", "openai", "anthropic"],
+    "defaults": {
+      "xai": { "requests": 1000, "window": 60000 },
+      "openai": { "requests": 500, "window": 60000 },
+      "anthropic": { "requests": 300, "window": 60000 }
+    },
+    "mock": "no external limit; simulated latency 200-800ms"
   },
-
-  "error_codes": {
-    "4001": "Invalid API key or authentication failure",
-    "4002": "Insufficient permissions for requested operation",
-    "4003": "Rate limit exceeded for this endpoint",
-    "4004": "Invalid transaction data format",
-    "5001": "Behavioral analysis engine temporarily unavailable",
-    "5002": "Containment protocol activation failed",
-    "5003": "Network propagation error",
-    "5004": "Recovery process initialization failed"
+  "security": {
+    "inputValidation": "transaction and prompt sanitization",
+    "timeouts": "30s abort controller on upstream calls",
+    "keyHandling": "keys read from process.env only; never logged",
+    "demoMode": "mock provider always enabled; no keys required"
   },
-
-  "security_notes": {
-    "data_protection": "All sensitive transaction data is encrypted in transit and at rest",
-    "privacy_compliance": "AEGES adheres to global privacy regulations (GDPR, CCPA)",
-    "audit_logging": "All API interactions are logged for security and compliance auditing",
-    "network_security": "API endpoints protected by enterprise-grade security measures"
+  "observability": {
+    "metrics": "internal rolling aggregates: totalAnalyses, averageLatency(ms), successRate, providerUsage",
+    "events": ["analysis_complete", "analysis_error"]
   },
-
-  "open_core_model": {
-    "open_components": [
-      "Basic behavioral analysis APIs",
-      "Standard threat detection patterns",
-      "Network status and intelligence sharing",
-      "Recovery process interfaces"
-    ],
-    "protected_components": [
-      "Advanced containment algorithms",
-      "Proprietary threat intelligence",
-      "Economic neutralization protocols", 
-      "Multi-party consensus mechanisms"
-    ],
-    "commercial_features": [
-      "Enhanced AI integration capabilities",
-      "Priority support and SLA guarantees",
-      "Custom threat pattern development",
-      "Dedicated network infrastructure"
-    ]
+  "usageExamples": {
+    "singleProvider": "new GrokAEGESIntegration({ enableConsensus:false, primaryProvider:'xai' }).analyzeTransactionWithAI(tx)",
+    "consensus": "new GrokAEGESIntegration({ enableConsensus:true }).analyzeTransactionWithAI(tx)",
+    "health": "integration.healthCheck()",
+    "metrics": "integration.getMetrics()",
+    "multiAI": "new MultiAIAnalyzer().analyzeWithMultipleProviders(tx)"
   }
 }
