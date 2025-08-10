@@ -25,8 +25,8 @@ class ConfigurationManager {
     // Primary API keys (user's own)
     this.config.apiKeys = {
       xai: process.env.XAI_API_KEY || 'xai-An3qboNlZdOZMQ2NPcxlAPCtuZqHDX5wrTy3z9HI0f0I6FmjCKydPAqMiwzU46UHGxMnm6BhpqhqSli3',
-      openai: process.env.OPENAI_API_KEY || null,
-      anthropic: process.env.ANTHROPIC_API_KEY || null
+      'openai': process.env.OPENAI_API_KEY || null,
+      'anthropic': process.env.ANTHROPIC_API_KEY || null
     };
 
     // Deployment configuration
