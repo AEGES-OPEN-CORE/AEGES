@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  aeges:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - XAI_API_KEY=${XAI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - REDIS_URL=redis://redis:6379
+      - DB_URL=postgres://aeges:${DB_PASSWORD:-aeges123}@postgres:5432/aeges
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - aeges-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - aeges-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=aeges
+      - POSTGRES_USER=aeges
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-aeges123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - aeges-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aeges"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  aeges-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
