@@ -37,7 +37,7 @@
     "cors": "^2.8.5",
     "helmet": "^7.0.0",
     "rate-limiter-flexible": "^3.0.0",
-    "prometheus-client": "^14.2.0"
+    "prom-client": "^14.1.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
