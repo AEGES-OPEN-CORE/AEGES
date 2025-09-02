@@ -1,26 +1,41 @@
-// Health check script for Docker containers
-import http from 'http';
+// health_check.js
+// Health check script for Docker containers and local runs
 
-const options = {
-  hostname: 'localhost',
-  port: process.env.PORT || 3000,
-  path: '/api/health',
-  timeout: 5000
-};
+import http from "http";
+import dotenv from "dotenv";
 
-const req = http.request(options, (res) => {
-  if (res.statusCode === 200) {
-    console.log('Health check passed');
-    process.exit(0);
-  } else {
-    console.log(`Health check failed: ${res.statusCode}`);
+// Load environment variables from .env
+dotenv.config();
+
+(async () => {
+  try {
+    const port = Number(process.env.PORT || 3000);
+
+    const options = {
+      hostname: "localhost",
+      port,
+      path: "/api/health",
+      timeout: 5000,
+    };
+
+    const req = http.request(options, (res) => {
+      if (res.statusCode === 200) {
+        console.log("✅ Health check passed");
+        process.exit(0);
+      } else {
+        console.error(`❌ Health check failed: ${res.statusCode}`);
+        process.exit(1);
+      }
+    });
+
+    req.on("error", (err) => {
+      console.error("❌ Health check error:", err.stack || err.message || err);
+      process.exit(1);
+    });
+
+    req.end();
+  } catch (e) {
+    console.error("❌ Health check script exception:", e.stack || e.message || e);
     process.exit(1);
   }
-});
-
-req.on('error', (error) => {
-  console.log(`Health check error: ${error.message}`);
-  process.exit(1);
-});
-
-req.end();
+})();
