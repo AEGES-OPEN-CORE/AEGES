@@ -41,8 +41,20 @@ AEGES ships with specialized kits for integrating AI systems, APIs, and infrastr
 - [**Grok3 Integration Kit**](integration-kits/grok3/README.md) –  
   Multi-provider AI consensus (xAI → OpenAI → Anthropic → Mock), sub-800ms response,  
   security hardening, and full Docker/Kubernetes deployment support.
-
 ---
+## 🛡️ Multi-Threat Deterrence Suite (Anomaly & Quarantine)
+
+AEGES defends high-value systems and economies through **quantum-resistant anomaly detection and quarantine controls**.  
+It provides resilience against ransomware and other advanced threats by detecting, isolating, and rolling back malicious activity.
+
+### Core Capabilities
+- **Anomaly Detection:** Flag suspicious encryption or lateral movement patterns.  
+- **Digital DNA Tracing:** Track process/file lineage for forensic accountability.  
+- **Quarantine & Rollback:** Contain threats and restore clean operational states.  
+- **Cross-Threat Coverage:** Adaptable to insider exfiltration, supply chain compromise, and killware.  
+
+📂 Integration Kit: `integration-kits/ransomware_demo/` *(stubbed for safe testing)*
+
 
 ## 🛡️ Commercial Use Notice
 
