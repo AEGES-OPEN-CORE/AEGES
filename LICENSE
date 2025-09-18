@@ -19,3 +19,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+### Additional Terms: Derivative Uses Notice (Effective October 1, 2025)
+
+This repository is released under an open-core model. The MIT License applies, subject to the following additional conditions:
+
+- **Permitted Uses (Open Source):**
+  Research, educational, and non-commercial testing are allowed under the MIT terms.
+
+- **Prohibited Without Authorization (Commercial):**
+  Any commercial use of this software — including but not limited to:
+    • Integrating AEGES asset protection, anomaly detection, digital DNA tracing, or quarantine/rollback into commercial products or services,  
+    • Offering derivative monitoring or test modules (e.g., exfiltration detection, insider anomaly control, quarantine scenarios) as part of a commercial product or managed service,  
+    • Monetizing derivative works that rely on AEGES core logic, specifications, or patent-covered methods,  
+
+requires prior written authorization and a commercial license from **DigiPie International PBC** or **BWRCI**.
+
+All commercial rights are expressly reserved under the AEGES **Premium Services Licensing Framework**. Unauthorized commercial exploitation may constitute infringement of patent-protected methods.
