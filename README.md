@@ -1,4 +1,5 @@
 # 🛡️ AEGES – AI-Enhanced Guardian for Economic Stability
+[![Commercial Use Requires License](https://img.shields.io/badge/Commercial%20Use-Requires%20License-red)](#-commercial-use-notice)
 
 **Quantum-resistant security for critical infrastructure & economic stability** —  
 aligned with **NIST Cybersecurity Framework 2.0** and compatible with **NIST PQC standards**.
@@ -26,7 +27,7 @@ advanced cyber threats, including those posed by quantum computing.
 | `CODE_OF_CONDUCT.md`              | Community guidelines |
 | `CONTRIBUTING.md`                 | Contribution process |
 | `SECURITY.md`                     | Vulnerability disclosure policy |
-| `PREMIUM_FEATURES.md`              | Enterprise-only extensions overview |
+| `PREMIUM_FEATURES.md`             | Enterprise-only extensions overview |
 | `integration-kits/`               | Folder for modular integrations |
 | `integration-kits/grok3/README.md`| Enhanced Grok3 AI integration kit |
 | `demo/` *(if applicable)*         | Demonstration and testing assets |
@@ -43,9 +44,29 @@ AEGES ships with specialized kits for integrating AI systems, APIs, and infrastr
 
 ---
 
+## 🛡️ Commercial Use Notice
+
+AEGES is released under an **open-core model**.  
+
+- ✅ **Permitted Uses (Open Source):**  
+  Free for research, educational, and non-commercial testing under the MIT License.  
+
+- 🚫 **Prohibited Without Authorization (Commercial):**  
+  Any commercial use of this software — including but not limited to:  
+  • Integrating AEGES asset protection, anomaly detection, digital DNA tracing, or quarantine/rollback into commercial products or services  
+  • Offering derivative monitoring or test modules (e.g., exfiltration detection, insider anomaly control, quarantine scenarios) as part of a commercial product or managed service  
+  • Monetizing derivative works that rely on AEGES core logic, specifications, or patent-covered methods  
+
+requires a **Premium Services License** from **DigiPie International PBC** or **BWRCI**.  
+
+**Effective Date:** October 1, 2025  
+
+---
+
 ## 🏁 Getting Started
 
 1. **Clone the repository**
    ```bash
    git clone https://github.com/AEGES-OPEN-CORE/AEGES.git
+
    cd AEGES
