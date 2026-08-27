@@ -1,7 +1,7 @@
 # AEGES Architecture
 
-**Status:** Public reference architecture  
-**Scope:** Governed value protection, bounded quarantine, evidence, and restoration workflows  
+**Status:** Public reference architecture
+**Scope:** Governed value protection, bounded quarantine, evidence, and restoration workflows
 **Relationship:** AEGES is an application layer aligned with OCUP Temporal Authority Governance
 
 ## Purpose
