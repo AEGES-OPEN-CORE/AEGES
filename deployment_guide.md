@@ -48,22 +48,25 @@ Provider APIs and model identifiers change independently. Confirm current provid
 
 Do not submit production, customer, private, financial, authentication, key, or regulated data. Model output is an analytical signal, not an enforceable governance decision or proof of fraud.
 
-## Current repository inconsistencies
+## Verified public path and remaining limits
 
-The checked-in deployment material predates this public-readiness review. Known issues include:
+A clean checkout has been verified for:
 
-- `npm test` references unit and integration test paths that are not present in the public tree;
-- `npm run demo` references `demo/aeges_demo.js`, which is not present;
-- `npm run k8s:deploy` references `k8s/`, which is not present;
-- the Dockerfile uses `npm ci`, while a tracked lockfile must be confirmed;
-- the Dockerfile calls `health-check.js`, while the repository file is named `health_check.js`;
-- the health-check helper imports `dotenv`, which is not declared in the current package dependencies;
-- `docker-compose.yml` references `init.sql`, which is not present;
-- Redis and PostgreSQL services are declared, but the current Express demonstration does not establish production persistence or cache integration;
-- example production CORS domains and service labels are not proof that those services exist or are authorized;
-- mock latency, confidence, and health values are simulation/application measurements, not performance benchmarks.
+- dependency installation from `package-lock.json`;
+- application startup;
+- `GET /api/health`;
+- `GET /api/demo`;
+- `POST /api/analyze` through the normalized mock-provider path.
 
-Until these items are reconciled and tested, local `npm install && npm start` is the only documented public path.
+The package scripts now reference files present in the public tree. Nonexistent test, Kubernetes, metrics, and demo targets have been removed. Redis, PostgreSQL, and missing initialization scaffolding have been removed from Compose because the current service does not use them.
+
+Remaining limits:
+
+- no deterministic automated test suite is included yet;
+- container execution has not been verified in an environment with Docker;
+- external model-provider paths were not exercised during this bounded verification;
+- provider APIs and model identifiers require current upstream confirmation;
+- application health is not a security, custody, consensus, compliance, or production-readiness attestation.
 
 ## Container status
 
