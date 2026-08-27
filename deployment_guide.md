@@ -1,6 +1,6 @@
 # AEGES Demonstration Deployment Notes
 
-**Status:** Development reference  
+**Status:** Development reference
 **Not approved for production or protection of real assets**
 
 ## Scope
