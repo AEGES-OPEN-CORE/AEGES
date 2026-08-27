@@ -1,7 +1,7 @@
 # AEGES Public Demonstration Guide
 
-**Status:** Reference demonstration only  
-**Data:** Synthetic inputs only  
+**Status:** Reference demonstration only
+**Data:** Synthetic inputs only
 **Effect:** No real funds, wallets, chains, accounts, infrastructure, or regulators are controlled
 
 ## What this demo shows
