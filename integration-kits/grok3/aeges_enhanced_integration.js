@@ -140,7 +140,22 @@ class AIProviderManager {
       const validatedPrompt = InputValidator.validatePrompt(prompt);
       
       if (provider === 'mock') {
-        return await this.mockAnalysis(validatedPrompt, options);
+        const response = await this.mockAnalysis(validatedPrompt, options);
+        const duration = Date.now() - startTime;
+
+        this.eventEmitter.emit('analysis_complete', {
+          provider,
+          duration,
+          success: true
+        });
+
+        return {
+          provider,
+          response: response.content,
+          confidence: this.calculateConfidence(response),
+          duration,
+          model: 'mock'
+        };
       }
 
       // Check rate limits

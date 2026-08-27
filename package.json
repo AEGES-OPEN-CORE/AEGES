@@ -1,45 +1,40 @@
 {
-  "name": "aeges-integration-kits",
+  "name": "aeges-open-core-demo",
   "version": "1.2.0",
-  "description": "AEGES Enhanced Integration Kits - Quantum-resistant AI security for critical infrastructure",
-  "main": "integration-kits/grok3/aeges_enhanced_integration.js",
+  "description": "Public AEGES reference service for synthetic transaction-analysis demonstrations",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "NODE_ENV=development node server.js",
     "prod": "NODE_ENV=production node server.js",
-    "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "node --test test/unit/*.test.js",
-    "test:integration": "node --test test/integration/*.test.js",
-    "test:xai": "node test/live_xai_test.js",
-    "docker:build": "docker build -t aeges:latest .",
-    "docker:run": "docker run -p 3000:3000 aeges:latest",
-    "k8s:deploy": "kubectl apply -f k8s/",
-    "health": "curl -f http://localhost:3000/api/health",
-    "metrics": "curl -f http://localhost:3000/api/metrics",
-    "demo": "node demo/aeges_demo.js"
+    "demo": "node aeges_llm_demo.js",
+    "health": "node health_check.js"
   },
   "keywords": [
     "aeges",
-    "xai",
-    "grok3",
-    "quantum-security",
-    "ai-consensus",
-    "defi-security",
-    "enterprise-ready"
+    "ocup",
+    "temporal-authority",
+    "quarantine",
+    "economic-security",
+    "reference-implementation"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/AEGES-OPEN-CORE/AEGES.git"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
-    "express": "^4.18.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
     "helmet": "^7.0.0",
-    "rate-limiter-flexible": "^3.0.0",
-    "prom-client": "^14.1.1"
+    "rate-limiter-flexible": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
-  }
+  },
+  "private": true
 }

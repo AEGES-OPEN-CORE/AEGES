@@ -1,34 +1,31 @@
-# 🛡 AEGES Grok3 Integration Kit
+# AEGES Model-Provider Integration Kit
 
-This folder contains the **enhanced Grok3 integration** for AEGES, featuring:
+**Status:** Public prototype for synthetic testing
 
-- Multi-provider AI consensus (xAI → OpenAI → Anthropic → Mock)
-- Sub-800ms target response time
-- Demo, Development, and Production modes
-- Security hardening with input validation and rate limiting
-- Full deployment support (Docker & Kubernetes)
+This folder contains the provider-adapter used by the AEGES demonstration service.
 
----
+## Present
 
-## 📜 API Specification
+- xAI, OpenAI, Anthropic, and mock adapter configuration;
+- basic input validation;
+- sequential provider fallback;
+- parallel response collection when aggregation is enabled;
+- application-local latency and usage metrics;
+- a JSON API-description artifact.
 
-See [**aeges_api_specification.json**](aeges_api_specification.json) for the complete, code-mirrored API documentation.
+## Not established
 
----
+- validated fraud detection;
+- enforceable quarantine or release;
+- Byzantine or governance consensus;
+- production performance targets;
+- post-quantum cryptography;
+- Kubernetes or enterprise deployment;
+- hardware-enforced OCUP integration;
+- provider endorsement or partnership.
 
-## 🚀 Deployment Guide
+The aggregation code combines provider responses and confidence fields. It must not be described as independent validator quorum or authoritative consensus.
 
-See the root [**README.md**](../../README.md) for:
+See the root [README](../../README.md), [architecture](../../ARCHITECTURE.md), [demo guide](../../DEMO.md), and [deployment notes](../../deployment_guide.md).
 
-- Full project overview
-- Environment setup
-- Deployment instructions
-- Performance metrics
-
----
-
-## 📂 Files in This Folder
-
-- **`aeges_enhanced_integration.js`** — Main integration code  
-- **`aeges_api_specification.json`** — Complete documented API spec  
-- **`deployment_guide.md`** — Detailed deployment steps for this integration  
+Use synthetic, non-sensitive data only.

@@ -1,4 +1,4 @@
-// AEGES Production Server - Enhanced for Enterprise Deployment
+// AEGES public reference service for synthetic transaction-analysis demos
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -30,7 +30,6 @@ app.use(cors({
 
 // Rate limiting
 const rateLimiter = new RateLimiterMemory({
-  keyBitsPerSecond: 10,
   points: NODE_ENV === 'production' ? 100 : 1000, // Requests per window
   duration: 60, // Per 60 seconds
 });
@@ -95,9 +94,7 @@ app.get('/api/health/detailed', async (req, res) => {
       overall: health.overall,
       timestamp: health.timestamp,
       services: {
-        aeges: health.overall,
-        database: 'healthy', // Add actual DB check
-        cache: 'healthy'     // Add actual cache check
+        aeges: health.overall
       },
       providers: health.providers,
       configuration: metrics.configuration,
@@ -212,7 +209,7 @@ function determineDeploymentMode() {
   const hasAnthropic = !!process.env.ANTHROPIC_API_KEY;
   
   if (hasXAI || hasOpenAI || hasAnthropic) {
-    return NODE_ENV === 'production' ? 'production' : 'development';
+    return 'provider-assisted-demo';
   }
   return 'demo';
 }
@@ -238,7 +235,7 @@ app.use('*', (req, res) => {
       'POST /api/analyze/multi',
       'GET /api/demo'
     ],
-    documentation: 'https://docs.aeges.org'
+    documentation: 'https://github.com/AEGES-OPEN-CORE/AEGES'
   });
 });
 
@@ -275,9 +272,9 @@ ${mode === 'demo' ? `
   export XAI_API_KEY=xai-your-key-here
   export OPENAI_API_KEY=sk-your-key-here
 ` : `
-🔥 Live AI Integration Active!
+🧪 Provider-Assisted Demo Active
 - Providers: ${metrics.availableProviders.map(p => p.name).join(', ')}
-- Ready for production analysis
+- Model output remains non-authoritative demonstration data
 `}
 ================================
   `);

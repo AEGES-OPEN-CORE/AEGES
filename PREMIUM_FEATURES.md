@@ -1,58 +1,34 @@
-# 🛡️ AEGES Premium Features & Open-Core Monetization Guide  
-**Last updated: August 04, 2025**  
-**AEGES: AI-Enhancing Guardian for Economic Stability**  
-— Security infrastructure for the People’s Autonomous Economy and beyond.
+# AEGES Commercial and Private-Feature Boundary
 
----
+**Status:** Informational; not a license grant or production-capability statement
 
-## ✅ What the Community CAN Monetize (No License Required)
-You may build on and offer services related to the open-core AEGES platform:
-- AEGES consulting and education services
-- Fraud protection integration using open-core only
-- Custom dashboards built on top of public APIs
-- Certification training or implementation support
-- Open-source add-ons or wrappers that don’t embed premium features
+AEGES follows an open-core development strategy: selected demonstrations, interface concepts, and documentation may be public, while patent-sensitive, security-sensitive, pilot-specific, or proprietary implementations may be separately controlled.
 
----
+## Public repository
 
-## 🛡️ Examples of Open Use
-No license or special permission needed for:
-- Integrating AEGES open-core into nonprofit or research AI tools
-- Offering AEGES-based workshops or presentations
-- Deploying for internal, non-commercial cybersecurity use
-- Participating in open R&D using published API spec and mock system
+The public tree currently provides:
 
----
+- a synthetic transaction-analysis demonstration;
+- model-provider adapters;
+- mock analysis;
+- reference API and configuration material;
+- OCUP-aligned quarantine, evidence, and fresh-release architecture.
 
-## 🔒 Premium Features (Commercial License Required)
-The following capabilities are proprietary and require a separate agreement for embedding, reselling, or monetizing:
+Availability in this repository does not mean a feature is production-ready, certified, deployed, or endorsed by a regulator, model provider, exchange, financial institution, or standards body.
 
-- **Threat Quarantine Wallet (FinCEN-aligned):** Isolates assets flagged in fraud or AI abuse contexts  
-- **Escrow Tracing Engine:** Immutable lineage of flagged assets through multi-wallet chains  
-- **Quantum-resistant verification:** Cryptographic framework protecting assets from AI or quantum spoofing  
-- **Live Smart Contract Re-keying:** Escrow protocols that regenerate validation without network disruption  
-- **Behavioral Disincentive Mapping:** AI tools that tie asset access to behavioral compliance  
-- **Multi-agency alert bridges:** Secure hooks for financial crime investigation and fraud signals
+## Potential controlled or separately licensed work
 
-💡 Why Pay?
-- FinCEN-aligned traceability for sovereign-grade compliance
-- Crypto-level fraud deterrence backed by runtime enforceability
-- Trusted by pilots in national and cross-border finance use cases
+Future agreements may cover implementation, integration, testing, evidence, support, certification work, hardware binding, quarantine workflows, validator infrastructure, or other private capabilities.
 
----
+A roadmap label or historical premium-feature description is not proof that the capability exists.
 
-## 🤝 Commercial Embedding / Integration
-If you’re embedding AEGES into a commercial security suite or product:
-- Reach out for a commercial agreement
-- Revenue-sharing and white-label terms available
-- Custom contracts or compliance support on request
+## Licensing
 
-We protect the commons by enabling responsible builders.
+The current `LICENSE` file combines an MIT-form grant with additional restrictions. This document does not interpret or repair that conflict. Review the complete license and obtain qualified advice before relying on any permission, especially for commercial use.
 
----
+Patent rights, trademarks, private implementations, services, and separately licensed materials are not granted merely because related public code or documentation is visible.
 
-## 📬 Contact
-📧 licensing@bwrci.org  
-🌐 [getaeges.org](https://getaeges.org)
+## Contact
 
-**AEGES: The guardian protocol of economic security.**
+- `licensing@bwrci.org`
+- [getaeges.org](https://getaeges.org)
