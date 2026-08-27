@@ -1,35 +1,25 @@
-# AEGES Production Dockerfile
-FROM node:18-alpine AS base
+FROM node:18-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Install production dependencies
-COPY package*.json ./
-RUN npm ci --only=production && npm cache clean --force
+COPY package.json ./
+RUN npm install --omit=dev && npm cache clean --force
 
-# Create non-root user for security
-RUN addgroup -g 1001 -S aeges && \
-    adduser -S aeges -u 1001
+COPY server.js health_check.js ./
+COPY integration-kits/grok3 ./integration-kits/grok3
 
-# Copy application code
-COPY . .
+RUN addgroup -g 1001 -S aeges \
+    && adduser -S aeges -u 1001 -G aeges \
+    && chown -R aeges:aeges /app
 
-# Set proper permissions
-RUN chown -R aeges:aeges /app
 USER aeges
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD node health-check.js
+ENV NODE_ENV=development
+ENV PORT=3000
 
-# Security labels
-LABEL security.scan="completed" \
-      maintainer="AEGES Team <team@aeges.org>" \
-      version="1.2.0"
-
-# Expose port
 EXPOSE 3000
 
-# Start application
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+  CMD node health_check.js
+
 CMD ["node", "server.js"]
