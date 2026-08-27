@@ -1,4 +1,4 @@
-![OCUP — One Chip Unified Protocol](OCUP-Hero.png)
+![OCUP — One Chip Unified Protocol](ASSETS/OCUP-Hero.png)
 
 # AEGES Open Core
 
