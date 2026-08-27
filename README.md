@@ -123,7 +123,8 @@ Use test credentials and non-sensitive synthetic data. Do not submit private fin
 | `server.js` | Express demonstration service and API endpoints |
 | `integration-kits/grok3/` | Provider adapter and API-example material |
 | `aeges_llm_demo.js` | Standalone demonstration surface |
-| `enhanced_env_config.js` | Reference environment/configuration handling |
+| `package.json` / `package-lock.json` | Reproducible public-demo dependency and command definitions |
+| `Dockerfile` / `docker-compose.yml` | Bounded single-service container scaffolding; execution verification pending |
 | `health_check.js` | Local health-check helper |
 | `index.html` | Browser demonstration interface |
 | `ARCHITECTURE.md` | Legacy architecture narrative; pending alignment with this README |
@@ -132,7 +133,7 @@ Use test credentials and non-sensitive synthetic data. Do not submit private fin
 | `PREMIUM_FEATURES.md` | Historical commercial concept document; pending legal and technical review |
 | `LICENSE` | Current repository licensing text; see the licensing note below |
 
-Some package scripts and deployment references describe files or infrastructure not presently included in the public tree. Treat them as historical targets until they are verified and reconciled.
+The local Node path has been clean-installed and exercised for health, synthetic-demo generation, and mock analysis. Container files have been narrowed to the implemented service, but container execution remains pending verification in an environment with Docker.
 
 ## Evidence and claim discipline
 
@@ -161,8 +162,8 @@ See:
 
 The public roadmap is intentionally bounded:
 
-1. Reconcile runnable demos, package scripts, and documentation.
-2. Add deterministic tests for public transaction-analysis behavior.
+1. Add deterministic tests for public transaction-analysis behavior.
+2. Verify the bounded container path in a clean Docker environment.
 3. Define a signed quarantine-decision and release-request evidence schema.
 4. Bind quarantine release to fresh external authority rather than application-local state.
 5. Separate model risk signals from enforceable policy decisions.
