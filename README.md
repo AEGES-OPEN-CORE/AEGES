@@ -171,6 +171,12 @@ The public roadmap is intentionally bounded:
 7. Define integration boundaries for hardware-rooted time, key custody, attestation, and OCUP capability gates.
 8. Pursue independent review before making production, performance, compliance, or protection claims.
 
+## Standards and IP posture
+
+AEGES is part of the unified OCUP open-core initiative, with an implementation-neutral and FRAND-friendly path toward standards adoption.
+
+See [Standards and IP posture](STANDARDS_AND_IP.md).
+
 ## Security
 
 Do not use this repository to protect production assets. Please report suspected vulnerabilities through the process in [SECURITY.md](SECURITY.md). Do not include secrets, private keys, customer records, or exploit payloads in public issues.
